@@ -27,13 +27,17 @@ public class Multicast {
         if (args.sendMode()){
             if (args.ip() instanceof Inet4Address){
                 try (MulticastSocket socket = new MulticastSocket()){
-                    socket.joinGroup(new InetSocketAddress(args.ip(),0), NetworkInterface.getNetworkInterfaces().nextElement());
+                    socket.joinGroup(new InetSocketAddress(args.ip(),40000), NetworkInterface.getNetworkInterfaces().nextElement());
                     DatagramPacket packet = new DatagramPacket(new byte[0],0);
+                    packet.setAddress(Inet4Address.getLocalHost());
+                    packet.setPort(40000);
                     TimerTask task = new TimerTask() {
                         @Override
                         public void run() {
                             try {
+                                System.out.println("Пакет готовится");
                                 socket.send(packet);
+                                System.out.println("Пакет отправлен");
                             } catch (IOException e) {
                                 log.error("Ошибка при отправке пакета");
                                 throw new RuntimeException(e);
@@ -50,15 +54,18 @@ public class Multicast {
         }else{
             if(args.ip() instanceof Inet4Address){
                 try (MulticastSocket socket = new MulticastSocket()) {
-                    socket.joinGroup(new InetSocketAddress(args.ip(),0), NetworkInterface.getNetworkInterfaces().nextElement());
-                    Thread thread = new Thread(() -> {
+                    socket.joinGroup(new InetSocketAddress(args.ip(),40000), NetworkInterface.getNetworkInterfaces().nextElement());
+//                    Thread thread = new Thread(() -> {
                         DatagramPacket packet = new DatagramPacket(buf, buf.length);
                         try {
+                            System.out.println("Ловлю пакет");
                             socket.receive(packet);
+                            System.out.println("Поймал пакет");
                         } catch (IOException e) {
                             log.error("Ошибка при получении пакета");
                             throw new RuntimeException(e);
                         }
+                        System.out.println("Добавляю адрес");
                         addresses.add(packet.getAddress());
                         try {
                             addresses.add(InetAddress.getByName("255.255.255.255"));
@@ -66,7 +73,7 @@ public class Multicast {
                             log.error("Ошибка при добавлении нового адреса");
                             throw new RuntimeException(e);
                         }
-                    });
+//                    });
                     //TODO реализовать удаление;
                     //TODO Че за х происходит с тредом при сокете?
                     TimerTask task = new TimerTask() {
@@ -75,16 +82,17 @@ public class Multicast {
                             System.out.println(addresses);
                         }
                     };
-                    thread.start();
-                    timer.schedule(task,0,1000);
-                    thread.join();
+//                    thread.start();
+                    timer.schedule(task,0,2000);
+//                    thread.join();
                     System.out.println("join");
                 } catch (IOException e) {
                     log.error("Ошибка сокета в режиме приема пакетов");
                     throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
                 }
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
             }
         }
     }

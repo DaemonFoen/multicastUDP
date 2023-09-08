@@ -1,7 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="multicastUDP.main:jar">
+  <artifact type="jar" name="multicastUDP.main:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/multicastUDP_main_jar</output-path>
     <root id="archive" name="multicastUDP.main.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
       <element id="module-output" name="multicastUDP.main" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.26/8f8cf0372abf564913e9796623aac4c8ea44025a/lombok-1.18.26.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.logging.log4j/log4j-core/2.20.0/eb2a9a47b1396e00b5eee1264296729a70565cc0/log4j-core-2.20.0.jar" path-in-jar="/" />
