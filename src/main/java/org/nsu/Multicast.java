@@ -7,12 +7,9 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.MulticastSocket;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
 import lombok.extern.log4j.Log4j2;
 
 
@@ -28,6 +25,8 @@ public class Multicast {
         }
     }
 
+
+
     private static void send(Args args){
         Timer timer = new Timer();
         try (DatagramSocket socket = new DatagramSocket(null)) {
@@ -35,7 +34,8 @@ public class Multicast {
                 @Override
                 public void run() {
                     try {
-                        DatagramPacket packet = new DatagramPacket(new byte[0], 0, args.ip(), args.port());
+                        byte[] key = args.key().getBytes(StandardCharsets.UTF_8);
+                        DatagramPacket packet = new DatagramPacket(key, key.length, args.ip(), args.port());
                         socket.send(packet);
                     } catch (IOException e) {
                         log.error("Ошибка при отправке пакета");
@@ -53,7 +53,8 @@ public class Multicast {
     private static void receive(Args args) {
         Set<InetAddress> addresses = new HashSet<>();
         Set<InetAddress> tmp = new HashSet<>();
-        byte[] buf = new byte[0];
+        byte[] key = args.key().getBytes(StandardCharsets.UTF_8);
+        byte[] buf = new byte[key.length];
         Timer timer = new Timer();
         try (MulticastSocket socket = new MulticastSocket(args.port())) {
             socket.joinGroup(new InetSocketAddress(args.ip(), 0), null);
@@ -67,7 +68,9 @@ public class Multicast {
                         log.error("Ошибка при получении пакета");
                         throw new RuntimeException(e);
                     }
-                    tmp.add(packet.getAddress());
+                    if (Arrays.equals(buf, key)){
+                        tmp.add(packet.getAddress());
+                    }
                 }
             });
             TimerTask task = new TimerTask() {
@@ -77,8 +80,8 @@ public class Multicast {
                         System.out.println(tmp);
                         addresses.clear();
                         addresses.addAll(tmp);
-                        tmp.clear();
                     }
+                    tmp.clear();
                 }
             };
             thread.start();

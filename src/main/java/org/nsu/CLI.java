@@ -18,6 +18,7 @@ public class CLI {
         options.addOption("m", "mode", true, "Режим отправки пакетов (s для отправки, r для получения)");
         options.addOption("i", "ip", true, "IP адресс multicast группы");
         options.addOption("p", "port", true, "Порт сервера");
+        options.addOption("k","key",true,"Ключ безопасности");
         options.addOption("h", "help", false, "...");
     }
 
@@ -31,6 +32,12 @@ public class CLI {
         String modeOption;
         InetAddress ipOption;
         int port;
+        String key;
+        if (cmd.hasOption("k")){
+            key = cmd.getOptionValue("k");
+        }else {
+            throw new RuntimeException("Нет обязательной опции k");
+        }
         if (cmd.hasOption("help")) {
             System.out.println(usage());
             System.exit(0);
@@ -63,7 +70,7 @@ public class CLI {
         } else {
             throw new RuntimeException("Нет обязательной опции i");
         }
-        return new Args(ipOption, modeOption.equals("s"), port);
+        return new Args(ipOption, modeOption.equals("s"), port, key);
     }
 
     public static String usage() {
