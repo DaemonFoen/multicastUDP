@@ -10,12 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dcc1a794-c8d5-4b34-8213-188dfbddad3d" name="Changes" comment="Все работает">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/nsu/Args.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/nsu/Args.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/nsu/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/nsu/CLI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/nsu/Multicast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/nsu/Multicast.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +47,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -86,11 +82,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager" selected="Application.Send">
+  <component name="RunManager" selected="Application.SendIP6">
     <configuration name="Recive" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="org.nsu.Main" />
       <module name="multicastUDP.main" />
-      <option name="PROGRAM_PARAMETERS" value="-m r -i 224.2.2.1 -p 34444 -k qwe" />
+      <option name="PROGRAM_PARAMETERS" value="-m r -i 224.2.3.1 -p 35555 -k qwe" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="org.nsu.*" />
@@ -104,7 +100,7 @@
     <configuration name="ReciveIP6" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="org.nsu.Main" />
       <module name="multicastUDP.main" />
-      <option name="PROGRAM_PARAMETERS" value="-m r -i FF00:BA98:7654:3210:FEDC:BA98:7654:3210 -p 34343" />
+      <option name="PROGRAM_PARAMETERS" value="-m r -i FF00:BA98:7654:3210:FEDC:BA98:7654:3210 -p 34343 -k qweerty" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -114,7 +110,7 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="org.nsu.Main" />
       <module name="multicastUDP.main" />
-      <option name="PROGRAM_PARAMETERS" value="-m s -i 224.2.2.1 -p 34444 -k key" />
+      <option name="PROGRAM_PARAMETERS" value="-m s -i 224.3.3.3 -p 35555 -k qwerty12345" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -122,7 +118,7 @@
     <configuration name="SendIP6" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="org.nsu.Main" />
       <module name="multicastUDP.main" />
-      <option name="PROGRAM_PARAMETERS" value="-m s -i FF00:BA98:7654:3210:FEDC:BA98:7654:3210 -p 34343" />
+      <option name="PROGRAM_PARAMETERS" value="-m s -i FF00:BA98:7654:3210:FEDC:BA98:7654:3210 -p 34343 -k qweerty" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
